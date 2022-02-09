@@ -1,5 +1,7 @@
 package com.example.carfax.controller
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -32,6 +34,15 @@ class DetailActivity : AppCompatActivity() {
         detailViewModel.car.observe(this) {
             Picasso.get().load(it.largeImage).placeholder(R.drawable.placeholder)
                 .into(binding.detailImage)
+        }
+
+        binding.detailCallDealerBtn.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:${detailViewModel.car.value?.dealerPhone}")
+                )
+            )
         }
 
     }

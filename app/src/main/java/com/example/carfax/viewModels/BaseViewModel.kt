@@ -1,6 +1,5 @@
 package com.example.carfax.viewModels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +18,6 @@ open class BaseViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = call.execute()
             if (response.isSuccessful) {
-                Log.d("@LH", "${response.body()}")
                 onSuccess(response.body())
             } else {
                 error.postValue(response.errorBody().toString())
